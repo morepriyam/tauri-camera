@@ -1,0 +1,114 @@
+.onboarding-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 2rem;
+  text-align: center;
+  height: 100vh;
+  overflow-y: auto;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.onboarding-screen h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: #fff;
+}
+
+.onboarding-screen > p {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+}
+
+.instructions {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.instructions h2 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.instructions ol,
+.instructions ul {
+  margin-left: 1rem;
+  line-height: 1.6;
+}
+
+.instructions li {
+  margin-bottom: 0.5rem;
+}
+
+.note {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.75rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.features {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+.features h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.features ul {
+  margin-left: 1rem;
+  line-height: 1.6;
+}
+
+.features li {
+  margin-bottom: 0.5rem;
+}
+
+.continue-button,
+.retry-button {
+  padding: 1rem 2rem;
+  margin-top: 1rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  border-radius: 25px;
+  background: linear-gradient(45deg, #ff6b6b, #ffa500);
+  color: white;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.continue-button:hover,
+.retry-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.retry-button {
+  background: linear-gradient(45deg, #ff9a9e, #fecfef);
+}
+
+.error-text {
+  color: #ffcccb;
+  margin-top: 1rem;
+  background: rgba(255, 0, 0, 0.1);
+  padding: 0.75rem;
+  border-radius: 8px;
+  border-left: 4px solid #ff4444;
+}
