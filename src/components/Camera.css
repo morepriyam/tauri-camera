@@ -23,6 +23,367 @@
   outline: none;
 }
 
+/* Camera Overlay */
+.camera-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1001;
+}
+
+.camera-overlay > * {
+  pointer-events: auto;
+}
+
+/* Top Controls */
+.top-controls {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, transparent 100%);
+}
+
+.flip-camera-button {
+  width: 50px;
+  height: 50px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  color: white;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(10px);
+}
+
+.flip-camera-button:hover {
+  background: rgba(0, 0, 0, 0.7);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.flip-camera-button:active {
+  transform: scale(0.95);
+}
+
+.recording-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.total-duration {
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  backdrop-filter: blur(10px);
+}
+
+.recording-indicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(220, 20, 60, 0.9);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  animation: pulse 1s infinite;
+}
+
+.recording-dot {
+  width: 8px;
+  height: 8px;
+  background: white;
+  border-radius: 50%;
+  animation: blink 1s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* Segments Container */
+.segments-container {
+  position: absolute;
+  top: 100px;
+  left: 20px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 12px;
+  padding: 16px;
+  backdrop-filter: blur(10px);
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.segments-progress-bar {
+  display: flex;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.segment-progress {
+  background: #007AFF;
+  transition: width 0.2s ease;
+}
+
+.segment-progress.recording {
+  background: #FF3B30;
+  animation: pulse 0.5s infinite;
+}
+
+.segments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.segment-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 8px 12px;
+  border-radius: 8px;
+  color: white;
+  font-size: 0.9rem;
+}
+
+.segment-number {
+  background: #007AFF;
+  color: white;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.segment-duration {
+  flex: 1;
+  text-align: center;
+  font-weight: 500;
+}
+
+.delete-segment-btn {
+  background: #FF3B30;
+  color: white;
+  border: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-weight: bold;
+  transition: all 0.2s ease;
+}
+
+.delete-segment-btn:hover {
+  background: #D70015;
+  transform: scale(1.1);
+}
+
+/* Bottom Controls */
+.bottom-controls {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 20px;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.6) 0%, transparent 100%);
+  gap: 16px;
+}
+
+.preview-button {
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: 2px solid #007AFF;
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(10px);
+}
+
+.preview-button:hover {
+  background: #007AFF;
+}
+
+.record-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+.record-button.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.record-button-inner {
+  width: 80px;
+  height: 80px;
+  background: #FF3B30;
+  border: 4px solid white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: white;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 20px rgba(255, 59, 48, 0.4);
+}
+
+.record-button:active:not(.disabled) .record-button-inner {
+  transform: scale(0.9);
+  background: #D70015;
+}
+
+.record-button.recording .record-button-inner {
+  background: #D70015;
+  animation: pulse 1s infinite;
+  transform: scale(1.1);
+}
+
+.record-button-text {
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-align: center;
+  opacity: 0.9;
+}
+
+.remaining-time {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* Preview Mode */
+.preview-mode {
+  background: #000;
+}
+
+.preview-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #000;
+}
+
+.preview-controls {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
+  z-index: 1002;
+}
+
+.preview-exit-btn {
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(10px);
+}
+
+.preview-exit-btn:hover {
+  background: rgba(0, 0, 0, 0.9);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.preview-info {
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  backdrop-filter: blur(10px);
+}
+
+.preview-counter {
+  color: white;
+}
+
+.preview-segments-bar {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  display: flex;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+  overflow: hidden;
+  z-index: 1002;
+}
+
+.preview-segment-indicator {
+  background: rgba(255, 255, 255, 0.6);
+  transition: all 0.3s ease;
+}
+
+.preview-segment-indicator.active {
+  background: #007AFF;
+}
+
 /* Loading State */
 .camera-loading {
   display: flex;
@@ -108,78 +469,75 @@
   transform: scale(0.98);
 }
 
-/* Flip Camera Button */
-.flip-camera-button {
-  position: absolute;
-  top: 60px;
-  right: 20px;
-  width: 50px;
-  height: 50px;
-  background: rgba(0, 0, 0, 0.5);
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  border-radius: 50%;
-  color: white;
-  font-size: 1.2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  backdrop-filter: blur(10px);
-  z-index: 1001;
-}
-
-.flip-camera-button:hover {
-  background: rgba(0, 0, 0, 0.7);
-  border-color: rgba(255, 255, 255, 0.5);
-}
-
-.flip-camera-button:active {
-  transform: scale(0.95);
-}
-
-/* Remove flip button if you want no buttons at all */
-.camera-container.no-controls .flip-camera-button {
-  display: none;
-}
-
 /* iOS Specific Styles */
 @supports (-webkit-touch-callout: none) {
-  .camera-video {
-    /* iOS Safari specific video optimizations */
+  .camera-video, .preview-video {
     -webkit-playsinline: true;
   }
   
   .camera-container {
-    /* Prevent iOS Safari bounce */
     position: fixed;
     overflow: hidden;
   }
+  
+  .record-button {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+  }
 }
 
-/* Android Specific Styles */
+/* Mobile Responsive */
 @media screen and (max-width: 768px) {
+  .top-controls {
+    padding: 16px;
+  }
+  
   .flip-camera-button {
-    top: 40px;
-    right: 16px;
     width: 45px;
     height: 45px;
     font-size: 1.1rem;
   }
   
-  .camera-loading {
+  .segments-container {
+    top: 80px;
+    left: 16px;
+    right: 16px;
+    padding: 12px;
+    max-height: 150px;
+  }
+  
+  .bottom-controls {
+    padding: 20px 16px;
+  }
+  
+  .record-button-inner {
+    width: 70px;
+    height: 70px;
+    font-size: 1.8rem;
+  }
+  
+  .preview-controls {
+    padding: 16px;
+  }
+  
+  .preview-segments-bar {
+    bottom: 16px;
+    left: 16px;
+    right: 16px;
+  }
+  
+  .camera-loading, .camera-error {
     padding: 1.5rem;
   }
   
   .camera-error {
-    padding: 1.5rem;
     max-width: 280px;
   }
 }
 
 /* Portrait Orientation */
 @media screen and (orientation: portrait) {
-  .camera-video {
+  .camera-video, .preview-video {
     width: 100vw;
     height: 100vh;
     object-fit: cover;
@@ -188,22 +546,40 @@
 
 /* Landscape Orientation */
 @media screen and (orientation: landscape) {
-  .camera-video {
+  .camera-video, .preview-video {
     width: 100vw;
     height: 100vh;
     object-fit: cover;
   }
   
-  .flip-camera-button {
-    top: 20px;
-    right: 20px;
+  .segments-container {
+    max-height: 120px;
   }
 }
 
 /* Safe Area Support for iPhone X and later */
 @supports (padding: max(0px)) {
-  .flip-camera-button {
-    top: max(60px, env(safe-area-inset-top, 60px));
+  .top-controls {
+    padding-top: max(20px, env(safe-area-inset-top, 20px));
+    padding-left: max(20px, env(safe-area-inset-left, 20px));
+    padding-right: max(20px, env(safe-area-inset-right, 20px));
+  }
+  
+  .bottom-controls {
+    padding-bottom: max(30px, env(safe-area-inset-bottom, 30px));
+    padding-left: max(20px, env(safe-area-inset-left, 20px));
+    padding-right: max(20px, env(safe-area-inset-right, 20px));
+  }
+  
+  .preview-controls {
+    padding-top: max(20px, env(safe-area-inset-top, 20px));
+    padding-left: max(20px, env(safe-area-inset-left, 20px));
+    padding-right: max(20px, env(safe-area-inset-right, 20px));
+  }
+  
+  .preview-segments-bar {
+    bottom: max(20px, env(safe-area-inset-bottom, 20px));
+    left: max(20px, env(safe-area-inset-left, 20px));
     right: max(20px, env(safe-area-inset-right, 20px));
   }
 }
